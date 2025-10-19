@@ -188,9 +188,9 @@
             
             .live-panel {
                 order: 2;
-                height: 180px;
-                min-height: 180px;
-                max-height: 25vh;
+                height: 200px;
+                min-height: 200px;
+                max-height: 30vh;
                 flex-shrink: 0;
                 overflow: hidden;
             }
@@ -334,6 +334,9 @@
                 font-size: 14px;
                 padding: 8px 12px;
                 white-space: nowrap;
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 10px;
             }
 
             .icon-btn, .profile-btn {
@@ -389,9 +392,18 @@
                 font-size: 14px;
             }
 
+            .feed {
+                flex: 1;
+                overflow-y: auto;
+                padding-right: 6px;
+                min-height: 0;
+                max-height: 140px;
+            }
+
             .feed-item {
                 padding: 10px;
                 gap: 10px;
+                min-height: 60px;
             }
 
             .avatar {
@@ -411,6 +423,20 @@
             .feed-win {
                 font-size: 14px;
                 min-width: 80px;
+            }
+
+            /* Улучшенная прокрутка для ленты */
+            .feed::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .feed::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .feed::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.2);
+                border-radius: 2px;
             }
         }
 
@@ -464,8 +490,12 @@
             }
 
             .live-panel {
-                height: 160px;
-                min-height: 160px;
+                height: 180px;
+                min-height: 180px;
+            }
+
+            .feed {
+                max-height: 120px;
             }
 
             .action-button {
@@ -514,6 +544,10 @@
 
             .bet-control {
                 gap: 8px;
+            }
+
+            .feed {
+                max-height: 90px;
             }
 
             .action-button {
@@ -954,7 +988,7 @@
         .feed {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             flex: 1;
             overflow-y: auto;
             padding-right: 6px;
@@ -970,6 +1004,7 @@
             border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s ease;
             gap: 12px;
+            min-height: 60px;
         }
 
         .avatar {
@@ -1281,9 +1316,9 @@
         
         // Генерация рандомных ников
         function generateRandomUsername() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let result = '';
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 result += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             return result;
@@ -1442,9 +1477,10 @@
         // ---------- Live feed functions -------------
         function generateLiveFeed() {
             const feedItems = [];
+            const names = ['Alex', 'Max', 'Kate', 'John', 'Anna', 'Mike', 'Sara', 'Tom', 'Lena', 'Dan'];
             
-            for (let i = 0; i < 12; i++) {
-                const username = generateRandomUsername();
+            for (let i = 0; i < 15; i++) {
+                const username = names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 1000);
                 const stake = (Math.random() * 50 + 5).toFixed(2);
                 const multiplier = (Math.random() * 8 + 1).toFixed(2);
                 const win = (parseFloat(stake) * parseFloat(multiplier)).toFixed(2);
@@ -1472,7 +1508,7 @@
 
                 const avatar = document.createElement('div');
                 avatar.className = 'avatar';
-                avatar.textContent = bet.name.substring(0, 2);
+                avatar.textContent = bet.name.substring(0, 2).toUpperCase();
 
                 const content = document.createElement('div');
                 content.className = 'feed-content';
@@ -1862,7 +1898,7 @@
             if (currentTab === 'live') {
                 updateLiveFeed();
             }
-        }, 2000);
+        }, 3000);
     </script>
 </body>
 </html>
