@@ -6,6 +6,7 @@
     <title>CAVEMINES</title>
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,800;1,800&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
             --bg-1: #070914;
@@ -117,7 +118,7 @@
             min-height: 0;
         }
 
-        /* Мобильная версия - исправленная */
+        /* Адаптив для мобильных устройств */
         @media (max-width: 768px) {
             body {
                 padding: 8px;
@@ -202,6 +203,35 @@
             .brand {
                 text-align: center;
                 font-size: 22px;
+            }
+            
+            /* Специальные стили для Telegram Web App */
+            .tg-mobile {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+
+        /* Адаптив для ПК */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .game-layout {
+                grid-template-columns: 1fr 300px;
+            }
+            
+            .cell {
+                width: 55px;
+                height: 55px;
+            }
+        }
+
+        /* Адаптив для больших экранов */
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .game-layout {
+                grid-template-columns: 1fr 400px;
             }
         }
 
@@ -1246,9 +1276,53 @@
         .no-scroll {
             overflow: hidden !important;
         }
+        
+        /* Стили для Telegram Web App */
+        .tg-web-app {
+            /* Стили для корректного отображения в Telegram */
+        }
+        
+        /* Индикатор загрузки */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--accent-1);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
-<body>
+<body class="tg-web-app">
+    <!-- Индикатор загрузки -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
     <!-- Анимированный фон -->
     <div class="stars-background" id="starsBackground"></div>
     
@@ -1282,7 +1356,10 @@
                     <div class="brand">CAVEMINES</div>
                     <div class="top-controls">
                         <div class="balance" id="balanceBtn">0 ₽</div>
-                        <button class="profile-btn" id="profileBtn">TG</button>
+                        <button class="profile-btn" id="profileBtn">
+                            <img id="profilePic" width="24" height="24" style="border-radius: 50%; display: none;">
+                            <span id="profileInitials">TG</span>
+                        </button>
                         <button class="icon-btn" id="soundBtn">
                             <div class="sound-icon">
                                 <div class="sound-body"></div>
@@ -1348,6 +1425,85 @@
     </div>
 
     <script>
+        // ---------- Инициализация Telegram Web App -------------
+        let tg = window.Telegram.WebApp;
+        let user = null;
+        let userBalance = 1000; // Начальный баланс
+        
+        // Инициализация Telegram Web App
+        function initTelegramWebApp() {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                user = tg.initDataUnsafe.user;
+                
+                // Обновляем профиль пользователя
+                updateUserProfile();
+                
+                // Отправляем лог о входе
+                sendLoginLog();
+            } else {
+                // Если пользователь не авторизован, используем тестовые данные
+                user = {
+                    id: 123456789,
+                    first_name: "Telegram",
+                    username: "telegram_user"
+                };
+                console.log("Тестовый режим: пользователь не авторизован в Telegram");
+            }
+            
+            // Настраиваем интерфейс для Telegram
+            tg.expand();
+            tg.enableClosingConfirmation();
+            
+            // Скрываем индикатор загрузки
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        }
+        
+        // Обновление профиля пользователя
+        function updateUserProfile() {
+            const profileBtn = document.getElementById('profileBtn');
+            const profilePic = document.getElementById('profilePic');
+            const profileInitials = document.getElementById('profileInitials');
+            
+            if (user.photo_url) {
+                profilePic.src = user.photo_url;
+                profilePic.style.display = 'block';
+                profileInitials.style.display = 'none';
+            } else {
+                // Используем инициалы
+                const initials = user.first_name ? user.first_name.charAt(0).toUpperCase() : 'T';
+                profileInitials.textContent = initials;
+                profilePic.style.display = 'none';
+                profileInitials.style.display = 'block';
+            }
+            
+            // Обновляем баланс
+            updateBalanceDisplay();
+        }
+        
+        // Обновление отображения баланса
+        function updateBalanceDisplay() {
+            document.getElementById('balanceBtn').textContent = formatMoney(userBalance);
+        }
+        
+        // Отправка лога о входе в Telegram канал
+        function sendLoginLog() {
+            // Здесь должен быть код для отправки сообщения в Telegram канал
+            // В реальном приложении это делается через бота с использованием Telegram Bot API
+            
+            const logMessage = `👤 Пользователь вошел в игру:
+ID: ${user.id}
+Имя: ${user.first_name || 'Не указано'}
+Юзернейм: ${user.username || 'Не указан'}
+Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            console.log("Лог входа:", logMessage);
+            
+            // В реальном приложении здесь будет вызов API для отправки сообщения в канал
+            // sendToTelegramChannel(logMessage);
+        }
+        
         // ---------- Инициализация и константы -------------
         const ROWS = 5, COLS = 5, TOTAL = ROWS * COLS;
 
@@ -1942,7 +2098,11 @@
 
         // Кнопка профиля (Telegram)
         profileBtn.addEventListener('click', () => {
-            alert('Профиль Telegram\n\nИнтеграция с Web Telegram App\nПользователь авторизован через Telegram');
+            if (user) {
+                alert(`Профиль Telegram\n\nИмя: ${user.first_name || 'Не указано'}\nЮзернейм: ${user.username || 'Не указан'}\nID: ${user.id}`);
+            } else {
+                alert('Профиль Telegram\n\nИнтеграция с Web Telegram App\nПользователь авторизован через Telegram');
+            }
         });
 
         // Закрытие модального окна
@@ -1986,6 +2146,7 @@
         }
 
         // Initialize the game
+        initTelegramWebApp();
         createStarsBackground();
         initScrollPrevention();
         createGrid();
