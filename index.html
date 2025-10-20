@@ -80,7 +80,6 @@
             width: 100%;
         }
 
-        /* ---------- УЛУЧШЕННАЯ АДАПТАЦИЯ ПАНЕЛЕЙ ---------- */
         .panel {
             background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.1));
             border-radius: 12px;
@@ -102,9 +101,9 @@
         }
 
         .live-panel {
-            height: 200px;
-            min-height: 200px;
-            max-height: 30vh;
+            height: 160px;
+            min-height: 160px;
+            max-height: 22vh;
             flex-shrink: 0;
         }
 
@@ -254,7 +253,6 @@
                 0 0 10px rgba(255,50,50,0.4);
         }
 
-        /* ---------- УЛУЧШЕННЫЙ БЛОК УПРАВЛЕНИЯ ---------- */
         .controls-section {
             display: flex;
             flex-direction: column;
@@ -263,6 +261,7 @@
             max-width: 100%;
             margin: 0 auto;
             flex-shrink: 0;
+            margin-top: auto;
         }
 
         .controls-top-row {
@@ -438,7 +437,6 @@
             min-width: 100px;
         }
 
-        /* Live panel */
         .tabs {
             display: flex;
             gap: 4px;
@@ -547,17 +545,14 @@
             text-shadow: 0 0 3px rgba(14,165,164,0.3);
         }
 
-        /* ---------- УЛУЧШЕННАЯ АДАПТАЦИЯ ДЛЯ ВСЕХ УСТРОЙСТВ ---------- */
-        
-        /* Очень маленькие экраны (до 360px) */
         @media (max-width: 360px) {
             .container {
                 padding: 6px;
             }
             
             .cell {
-                width: 44px;
-                height: 44px;
+                width: 42px;
+                height: 42px;
             }
             
             .max-win-card {
@@ -585,51 +580,12 @@
                 font-size: 16px;
             }
             
-            .header {
-                margin-bottom: 10px;
-            }
-            
-            .game-area {
-                gap: 10px;
-            }
-            
-            .controls-section {
-                gap: 8px;
+            .live-panel {
+                height: 140px;
+                min-height: 140px;
             }
         }
 
-        /* Маленькие экраны (361px - 480px) */
-        @media (min-width: 361px) and (max-width: 480px) {
-            .cell {
-                width: 48px;
-                height: 48px;
-            }
-        }
-
-        /* Средние экраны (481px - 768px) */
-        @media (min-width: 481px) and (max-width: 768px) {
-            .cell {
-                width: 52px;
-                height: 52px;
-            }
-            
-            .brand {
-                font-size: 20px;
-            }
-            
-            .balance {
-                font-size: 16px;
-                padding: 8px 12px;
-            }
-            
-            .icon-btn, .profile-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
-        }
-
-        /* Ландшафтная ориентация для мобильных устройств */
         @media (max-width: 768px) and (orientation: landscape) {
             .game-layout {
                 flex-direction: row;
@@ -651,160 +607,8 @@
                 width: 40px;
                 height: 40px;
             }
-            
-            .controls-section {
-                gap: 8px;
-            }
-            
-            .header {
-                margin-bottom: 8px;
-            }
-            
-            .game-area {
-                gap: 8px;
-            }
         }
 
-        /* Большие экраны (769px - 1024px) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                max-width: 800px;
-                padding: 12px;
-            }
-            
-            .cell {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .brand {
-                font-size: 22px;
-            }
-            
-            .balance {
-                font-size: 18px;
-                padding: 10px 14px;
-            }
-            
-            .icon-btn, .profile-btn {
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
-            }
-            
-            .action-button {
-                font-size: 16px;
-                padding: 12px 18px;
-            }
-        }
-
-        /* Очень большие экраны (1025px+) */
-        @media (min-width: 1025px) {
-            .container {
-                max-width: 900px;
-                padding: 16px;
-            }
-            
-            .cell {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .brand {
-                font-size: 24px;
-            }
-            
-            .balance {
-                font-size: 20px;
-                padding: 12px 16px;
-            }
-            
-            .icon-btn, .profile-btn {
-                width: 46px;
-                height: 46px;
-                font-size: 20px;
-            }
-            
-            .action-button {
-                font-size: 18px;
-                padding: 14px 20px;
-            }
-        }
-
-        /* Высокие экраны (больше 800px по высоте) */
-        @media (min-height: 800px) {
-            .live-panel {
-                height: 250px;
-                min-height: 250px;
-            }
-            
-            .cell {
-                width: 56px;
-                height: 56px;
-            }
-        }
-
-        /* Очень высокие экраны (больше 1000px по высоте) */
-        @media (min-height: 1000px) {
-            .live-panel {
-                height: 300px;
-                min-height: 300px;
-            }
-            
-            .cell {
-                width: 64px;
-                height: 64px;
-            }
-        }
-
-        /* Адаптация для очень узких экранов */
-        @media (max-width: 320px) {
-            .container {
-                padding: 4px;
-            }
-            
-            .cell {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .max-win-card {
-                width: 90px;
-                padding: 6px;
-            }
-            
-            .mine-btn {
-                padding: 4px 1px;
-                font-size: 11px;
-            }
-            
-            .action-button {
-                min-width: 80px;
-                padding: 6px 10px;
-                font-size: 12px;
-            }
-            
-            .balance {
-                font-size: 11px;
-                padding: 4px 6px;
-            }
-            
-            .brand {
-                font-size: 14px;
-            }
-            
-            .top-controls {
-                gap: 4px;
-            }
-            
-            .icon-btn, .profile-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-            }
-        }
-
-        /* Индикатор загрузки */
         .loader {
             position: fixed;
             top: 0;
@@ -838,7 +642,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Модальные окна */
         .profile-overlay, .help-overlay {
             position: fixed;
             top: 0;
@@ -863,25 +666,15 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Адаптация модальных окон */
-        @media (max-width: 480px) {
-            .profile-overlay, .help-overlay {
-                padding: 10px;
-            }
-        }
     </style>
 </head>
 <body class="tg-web-app">
-    <!-- Индикатор загрузки -->
     <div class="loader" id="loader">
         <div class="loader-spinner"></div>
     </div>
     
-    <!-- Градиентный фон -->
     <div class="gradient-bg"></div>
     
-    <!-- Модальные окна -->
     <div class="profile-overlay" id="profileOverlay">
         <div class="panel" style="max-width: 400px; width: 100%; position: relative;">
             <button class="close-profile" id="closeProfile" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--muted); font-size: 24px; cursor: pointer;">×</button>
@@ -964,10 +757,8 @@
         </div>
     </div>
     
-    <!-- ОСНОВНОЙ ИНТЕРФЕЙС -->
     <div class="container">
         <div class="game-layout">
-            <!-- Основная игровая панель -->
             <div class="panel game-panel">
                 <div class="header">
                     <div class="brand">CAVEMINES</div>
@@ -982,14 +773,11 @@
                 </div>
 
                 <div class="game-area">
-                    <!-- Игровое поле -->
                     <div class="board-container">
                         <div class="grid" id="grid"></div>
                     </div>
 
-                    <!-- Блок управления -->
                     <div class="controls-section">
-                        <!-- Верхний ряд: мины и максимальный выигрыш -->
                         <div class="controls-top-row">
                             <div class="mines-panel">
                                 <div class="title">Количество мин</div>
@@ -1007,7 +795,6 @@
                             </div>
                         </div>
 
-                        <!-- Нижний ряд: ставка и кнопка действия -->
                         <div class="bet-control">
                             <div class="bet-panel">
                                 <div class="bet-label">Сумма ставки</div>
@@ -1024,7 +811,6 @@
                 </div>
             </div>
 
-            <!-- Панель с лентой ставок -->
             <div class="panel live-panel">
                 <div class="tabs">
                     <button class="tab active" data-tab="live">Live</button>
@@ -1032,20 +818,17 @@
                 </div>
 
                 <div class="feed" id="feed">
-                    <!-- Live записи будут добавляться динамически -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ---------- Инициализация Telegram Web App -------------
         let tg = window.Telegram.WebApp;
         let user = null;
         let userBalance = 1000;
         let gamesPlayed = 24;
 
-        // Инициализация Telegram Web App
         function initTelegramWebApp() {
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 user = tg.initDataUnsafe.user;
@@ -1066,7 +849,6 @@
             }, 1000);
         }
         
-        // Обновление профиля пользователя
         function updateUserProfile() {
             const profileInitials = document.getElementById('profileInitials');
             const profileModalInitials = document.getElementById('profileModalInitials');
@@ -1083,7 +865,6 @@
             updateProfileStats();
         }
         
-        // Обновление статистики в профиле
         function updateProfileStats() {
             document.getElementById('balanceBtn').textContent = formatMoney(userBalance);
             document.getElementById('statBalance').textContent = formatMoney(userBalance);
@@ -1093,10 +874,8 @@
             document.getElementById('profileMaxWin').textContent = formatMoney(maxWin);
         }
         
-        // ---------- Инициализация игры -------------
         const ROWS = 5, COLS = 5, TOTAL = ROWS * COLS;
 
-        // Game state
         let minesCount = 1;
         let bet = 1;
         let board = [];
@@ -1108,7 +887,6 @@
         let currentTab = 'live';
         let minesRevealed = false;
 
-        // DOM elements
         const gridEl = document.getElementById('grid');
         const maxWinEl = document.getElementById('maxWin');
         const mineBtns = document.querySelectorAll('.mine-btn');
@@ -1128,7 +906,6 @@
         const helpOverlay = document.getElementById('helpOverlay');
         const closeHelp = document.getElementById('closeHelp');
 
-        // ---------- Управление модальными окнами -------------
         function showProfileModal() {
             updateProfileStats();
             profileOverlay.classList.add('active');
@@ -1150,7 +927,6 @@
             document.body.style.overflow = '';
         }
 
-        // Функция для открытия Telegram с техподдержкой
         function openTelegramSupport() {
             const supportUsername = '@HelpGivemines';
             
@@ -1167,7 +943,6 @@
             hideProfileModal();
         }
 
-        // ---------- Утилиты -------------
         function formatMoney(x) {
             const n = Number(x) || 0;
             return n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
@@ -1177,7 +952,6 @@
             return parseFloat(str.replace(/\s/g, '').replace(',', '.')) || 0;
         }
 
-        // Кастомные SVG иконки
         function getMineIcon() {
             return `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="20" cy="20" r="18" fill="#f87171" stroke="#7f1d1d" stroke-width="2"/>
@@ -1193,7 +967,6 @@
             </svg>`;
         }
 
-        // ---------- Live feed functions -------------
         function generateLiveFeed() {
             const feedItems = [];
             const names = ['Alex', 'Max', 'Kate', 'John', 'Anna', 'Mike', 'Sara', 'Tom', 'Lena', 'Dan'];
@@ -1255,7 +1028,6 @@
             });
         }
 
-        // ---------- Board functions -------------
         function createGrid() {
             gridEl.innerHTML = '';
             for (let i = 0; i < TOTAL; i++) {
@@ -1310,7 +1082,6 @@
             }
         }
 
-        // ---------- Game interactions -------------
         function onCellClick(idx) {
             if (lost) return;
             if (!playing) return;
@@ -1436,7 +1207,6 @@
             });
         }
 
-        // ---------- UI updates -------------
         function updateUI() {
             const maxWin = calculateMaxWin(minesCount, bet);
             maxWinEl.textContent = formatMoney(maxWin);
@@ -1463,7 +1233,6 @@
             return betAmount * maxMultiplier * (TOTAL - mines) / 2;
         }
 
-        // ---------- Event listeners -------------
         mineBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 mineBtns.forEach(b => b.classList.remove('active'));
@@ -1557,7 +1326,6 @@
             });
         });
 
-        // Initialize the game
         initTelegramWebApp();
         createGrid();
         initBoard();
