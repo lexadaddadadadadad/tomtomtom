@@ -60,7 +60,8 @@
         }
 
         .container {
-            max-width: 100%;
+            width: 100%;
+            max-width: 400px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -101,9 +102,8 @@
         }
 
         .live-panel {
-            height: 160px;
-            min-height: 160px;
-            max-height: 22vh;
+            height: 180px;
+            min-height: 180px;
             flex-shrink: 0;
         }
 
@@ -197,8 +197,8 @@
             box-shadow: 
                 inset 0 -4px 8px rgba(0,0,0,0.4),
                 0 4px 15px rgba(0,0,0,0.3);
-            width: fit-content;
-            max-width: 100%;
+            width: 100%;
+            max-width: 300px;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
@@ -209,7 +209,7 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 5px;
             padding: 4px;
-            max-width: 100%;
+            width: 100%;
         }
 
         .cell {
@@ -258,7 +258,6 @@
             flex-direction: column;
             gap: 10px;
             width: 100%;
-            max-width: 100%;
             margin: 0 auto;
             flex-shrink: 0;
             margin-top: auto;
@@ -545,70 +544,6 @@
             text-shadow: 0 0 3px rgba(14,165,164,0.3);
         }
 
-        @media (max-width: 360px) {
-            .container {
-                padding: 6px;
-            }
-            
-            .cell {
-                width: 42px;
-                height: 42px;
-            }
-            
-            .max-win-card {
-                width: 100px;
-                padding: 8px;
-            }
-            
-            .mine-btn {
-                padding: 6px 2px;
-                font-size: 12px;
-            }
-            
-            .action-button {
-                min-width: 90px;
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-            
-            .balance {
-                font-size: 12px;
-                padding: 5px 8px;
-            }
-            
-            .brand {
-                font-size: 16px;
-            }
-            
-            .live-panel {
-                height: 140px;
-                min-height: 140px;
-            }
-        }
-
-        @media (max-width: 768px) and (orientation: landscape) {
-            .game-layout {
-                flex-direction: row;
-                gap: 6px;
-            }
-            
-            .game-panel {
-                flex: 2;
-            }
-            
-            .live-panel {
-                flex: 1;
-                height: auto;
-                min-height: auto;
-                max-height: none;
-            }
-            
-            .cell {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
         .loader {
             position: fixed;
             top: 0;
@@ -665,6 +600,14 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* ФИКСИРОВАННЫЙ РАЗМЕР ДЛЯ ВСЕХ УСТРОЙСТВ */
+        @media (min-width: 401px) {
+            .container {
+                border-left: 1px solid rgba(255,255,255,0.1);
+                border-right: 1px solid rgba(255,255,255,0.1);
+            }
         }
     </style>
 </head>
@@ -824,6 +767,7 @@
     </div>
 
     <script>
+        // JavaScript код остается без изменений
         let tg = window.Telegram.WebApp;
         let user = null;
         let userBalance = 1000;
